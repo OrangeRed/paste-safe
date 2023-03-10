@@ -1,20 +1,16 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import { AES, enc as encoding } from "crypto-ts";
+import { AES } from "crypto-ts";
 import { createId } from "@paralleldrive/cuid2";
 
 import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
   const createSnippet = api.snippet.createSnippet.useMutation();
-  const { data: snippet } = api.snippet.getSnippet.useQuery(
-    "us3rhr0ev7lxijjyporrq4s3"
-  );
 
   const [snippetPassword, setSnippetPassword] = useState("");
   const [snippetContents, setSnippetContents] = useState("");
-  const [decryptedSnippet, setDecryptedSnippet] = useState("");
 
   return (
     <>
@@ -68,23 +64,6 @@ const Home: NextPage = () => {
               placeholder="Snippet goes here"
               onChange={(e) => setSnippetContents(e.target.value)}
             />
-          </div>
-
-          <div className="flex flex-col">
-            <span>Encrypted: {snippet?.content}</span>
-            <button
-              className="btn-secondary btn w-48"
-              onClick={() => {
-                setDecryptedSnippet(
-                  AES.decrypt(snippet?.content ?? "", snippetPassword).toString(
-                    encoding.Utf8
-                  )
-                );
-              }}
-            >
-              Decrypt
-            </button>
-            <span>Decrypted: {decryptedSnippet}</span>
           </div>
         </div>
       </main>
