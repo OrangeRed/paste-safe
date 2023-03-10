@@ -1,16 +1,16 @@
-import { type NextPage } from "next";
-import Head from "next/head";
-import { useState } from "react";
-import { AES } from "crypto-ts";
-import { createId } from "@paralleldrive/cuid2";
+import { type NextPage } from "next"
+import Head from "next/head"
+import { useState } from "react"
+import { AES } from "crypto-ts"
+import { createId } from "@paralleldrive/cuid2"
 
-import { api } from "~/utils/api";
+import { api } from "~/utils/api"
 
 const Home: NextPage = () => {
-  const createSnippet = api.snippet.createSnippet.useMutation();
+  const createSnippet = api.snippet.createSnippet.useMutation()
 
-  const [snippetPassword, setSnippetPassword] = useState("");
-  const [snippetContents, setSnippetContents] = useState("");
+  const [snippetPassword, setSnippetPassword] = useState("")
+  const [snippetContents, setSnippetContents] = useState("")
 
   return (
     <>
@@ -40,13 +40,13 @@ const Home: NextPage = () => {
                   ${!snippetContents ? "btn-disabled" : ""}  
                 `}
                 onClick={() => {
-                  const url = createId();
+                  const url = createId()
                   const encryptedSnippet = AES.encrypt(
                     snippetContents,
                     snippetPassword
-                  ).toString();
+                  ).toString()
 
-                  createSnippet.mutate({ url, content: encryptedSnippet });
+                  createSnippet.mutate({ url, content: encryptedSnippet })
                 }}
               >
                 Submit
@@ -68,7 +68,7 @@ const Home: NextPage = () => {
         </div>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

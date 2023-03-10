@@ -1,6 +1,6 @@
-import { z } from "zod";
+import { z } from "zod"
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc"
 
 export const snippetRouter = createTRPCRouter({
   // Store an encrypted snippet
@@ -19,7 +19,7 @@ export const snippetRouter = createTRPCRouter({
           content: input.content,
           burnAt: input.burnAt,
         },
-      });
+      })
     }),
 
   // Get a snippet's contents if it hasn't been burned yet
@@ -31,6 +31,6 @@ export const snippetRouter = createTRPCRouter({
         //   lt: new Date(),
         // },
       },
-    });
+    })
   }),
-});
+})
